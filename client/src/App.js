@@ -1,34 +1,28 @@
 import React, { Component } from 'react';
-import { Switch, Route, Link} from 'react-router-dom'
-import './App.css';
 import Home from './components/Home'
+import AppNavbar from './components/AppNavbar';
+import {Route} from 'react-router-dom';
+import Landing from './components/Landing';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
+
+
 class App extends Component {
   state = {
     response: ''
   };
 
-  componentDidMount(){
-      this.callApi()
-        .then(response => this.setState({ response: response.express}))
-        .catch(err => console.log(err));
-  }
-
-  callApi = async () => {
-    const response = await fetch('/api/hello');
-    const body = await response.json();
-
-    if (response.status !== 200){
-      throw Error(body.message);
-    }
-
-    return body;
-  }
 
 
   render() {
     return (
       <div>
-        <Home/>
+        <AppNavbar />
+        <main>
+          <Route exact path="/" component={Home} />  {/* exact path because by default a route matches any path in the URL that begins with the value of the path prop */}
+          <Route path="/landing" component={Landing} />
+        </main>
         <p className="App-intro">
         { this.state.response }
         </p>
