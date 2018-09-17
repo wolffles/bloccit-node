@@ -12,7 +12,8 @@ import {
     DropdownMenu,
     DropdownItem
 } from 'reactstrap';
-import Landing from './Landing';
+
+import Topic from './Topic';
 
 class AppNavbar extends Component {
     state = {
@@ -34,7 +35,7 @@ class AppNavbar extends Component {
                 <Collapse isOpen={this.state.isOpen} navbar>
                   <Nav className="ml-auto" navbar>
                     <NavItem>
-                      <NavLink href="/landing/" component={Landing}>landing</NavLink>
+                      <NavLink href="/Topic/" component={Topic}>Topic</NavLink>
                     </NavItem>
                     <NavItem>
                       <NavLink href="https://github.com/wolffles">GitHub</NavLink>

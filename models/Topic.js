@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 //create Schema 
 
-const TaskSchema = new Schema({
+const TopicSchema = new Schema({
     topic: {
         type: String,
         required: true
@@ -18,4 +18,4 @@ const TaskSchema = new Schema({
     }
 });
 
-module.export = Task = mongoose.model('topic', TopicSchema);
+module.exports = Topic = mongoose.model('topic', TopicSchema);
