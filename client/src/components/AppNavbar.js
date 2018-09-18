@@ -30,12 +30,12 @@ class AppNavbar extends Component {
         return (
             <div>
               <Navbar color="dark" dark expand="sm" className="mb-5">
-                <NavbarBrand href="/">reactstrap</NavbarBrand>
+                <NavbarBrand href="/">Bloccit</NavbarBrand>
                 <NavbarToggler onClick={this.toggle} />
                 <Collapse isOpen={this.state.isOpen} navbar>
                   <Nav className="ml-auto" navbar>
                     <NavItem>
-                      <NavLink href="/topic" >Topic</NavLink>
+                      <NavLink href="/topics" >Topic</NavLink>
                     </NavItem>
                     <NavItem>
                       <NavLink href="https://github.com/wolffles">GitHub</NavLink>

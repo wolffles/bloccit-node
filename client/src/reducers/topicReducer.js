@@ -1,4 +1,4 @@
-import {GET_TOPICS, ADD_TOPIC, DELETE_TOPIC, TASKS_LOADING } from '../actions/types.js';
+import {GET_TOPICS, ADD_TOPIC, DELETE_TOPIC, LOADING} from '../actions/types.js';
 const initialState = {
     topics: [],
     loading: false
@@ -14,7 +14,7 @@ export default function( state = initialState, action) {
         case DELETE_TOPIC:
             return {
                 ...state,
-                topics: state.topics.filter(topic => topic.id !== action.payload)
+                topics: state.topics.filter(topic => topic._id !== action.payload)
             }
 
         case ADD_TOPIC: 
@@ -23,7 +23,7 @@ export default function( state = initialState, action) {
                 topics: [action.payload, ...state.topics]
             }
 
-        case TASKS_LOADING:
+        case LOADING:
             return {
                 ...state,
                 loading: true

@@ -12,22 +12,17 @@ import './App.css';
 
 
 class App extends Component {
-  state = {
-    response: ''
-  };
+
 
   render() {
     return (
       <Provider store={store}>
-        <div>
+        <div className="App">
           <AppNavbar />
           <main>
             <Route exact path="/" component={Home} />  {/* exact path because by default a route matches any path in the URL that begins with the value of the path prop */}
-            <Route path="/topic" component={Topic} />
+            <Route path="/topics" component={Topic} />
           </main>
-          <p className="App-intro">
-          { this.state.response }
-          </p>
         </div>
       </Provider>
     );

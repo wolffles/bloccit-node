@@ -29,7 +29,7 @@ class TopicModal extends Component{
     }
 
     onChange = (e) => {
-        this.setState({[e.target.field]: e.target.value});
+        this.setState({[e.target.name]: e.target.value});
     }
 
     onSubmit = (e) => {
@@ -68,7 +68,7 @@ class TopicModal extends Component{
                                 <Label for="topic">Topic</Label>
                                 <Input
                                     type="text"
-                                    field="topic"
+                                    name="topic"
                                     id="topic"
                                     placeholder="Enter topic"
                                     //when you have an input you usually have a function in this case its onChange
@@ -77,7 +77,7 @@ class TopicModal extends Component{
                                 </Input>
                                 <Input
                                     type="textarea"
-                                    field="description"
+                                    name="description"
                                     id="topic"
                                     placeholder="Enter description"
                                     //when you have an input you usually have a function in this case its onChange

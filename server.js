@@ -22,7 +22,7 @@ mongoose.connect(db)
 //use routes... anything that refers to api/tasks should refer
 // to the tasks variable commented out above
 app.use('/api/home', home);
-app.use('/api/topics', topics);
+app.use('/app/topics', topics);
 
 
 //Serve Static assets if in production
