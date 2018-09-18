@@ -13,7 +13,7 @@ import {
     DropdownItem
 } from 'reactstrap';
 
-import Topic from './Topic';
+// import Topic from './Topic'
 
 class AppNavbar extends Component {
     state = {
@@ -35,7 +35,7 @@ class AppNavbar extends Component {
                 <Collapse isOpen={this.state.isOpen} navbar>
                   <Nav className="ml-auto" navbar>
                     <NavItem>
-                      <NavLink href="/Topic/" component={Topic}>Topic</NavLink>
+                      <NavLink href="/topic" >Topic</NavLink>
                     </NavItem>
                     <NavItem>
                       <NavLink href="https://github.com/wolffles">GitHub</NavLink>
