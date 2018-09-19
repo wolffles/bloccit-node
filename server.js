@@ -15,14 +15,13 @@ app.use(express.json());
 const db = require('./config/keys').mongoURI
 
 //connect to Mongo
-mongoose.connect(db)
-    .then(() => console.log('MongoDB Connect...'))
-    .catch(err => console.log(err));
+mongoose.connect(db,{ useNewUrlParser: true })
+    .then(() => console.log('MongoDB Connect...')).catch(err => console.log(err));
 
 //use routes... anything that refers to api/tasks should refer
 // to the tasks variable commented out above
 app.use('/api/home', home);
-app.use('/app/topics', topics);
+app.use('/api/topics', topics);
 
 
 //Serve Static assets if in production
