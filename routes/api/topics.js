@@ -28,17 +28,17 @@ router.get('/:id/posts', (req,res) => {
    
 })
 
-router.post('/:id/posts', (req,res) => {
-    const { id } = req.params
-    console.log(id);
-    
-    const newPost = new Post({
-        post: req.body.post,
-        description: req.body.description,
-        topic_id: id
-    })
+router.post('/:id/posts', async (req,res) => {
 
-    const topic = Topic.findById(id).then(topics => res.json(topics))
+    const { id } = req.params // works
+  
+    const newPost = new Post({
+      post: req.body.post,
+      description: req.body.description,
+      topic_id: req.body.id
+    })
+  
+    const topic = await Topic.findById(id).then(topics => res.json(topics))
     
     console.log(topic.posts)// and I don't understand why my topic object is always undefined
 

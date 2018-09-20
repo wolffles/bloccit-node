@@ -17,7 +17,7 @@ const PostSchema = new Schema({
         default: Date.now
     },
     topic: {
-         $ref: 'topic',
+         ref: 'topic',
          type: Schema.Types.ObjectId
     },
     comments: [
