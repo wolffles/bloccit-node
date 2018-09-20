@@ -4,10 +4,11 @@ const router = express.Router();
 const Post = require("../../models/Post");
 const Topic = require('../../models/Topic');
 
-router.get("/", (req,res) => {
-    Post.find()
-        .sort({ date: -1 })
-        .then(posts => res.json(posts));
+router.get(":topic_id/", (req,res) => {
+    Topic.findById(req.params.topic_id).then(ele => res.json(ele))
+    // Post.find()
+    //     .sort({ date: -1 })
+    //     .then(posts => res.json(posts));
     //console.log("works")
 });
 
@@ -23,25 +24,38 @@ router.delete('/:id', (req, res) => {
 //@description Post A Post
 //@access Public
 
+// router.post("/:topicId", (req,res) => {
+//     //gets topic id form param
+//     const {topic_id} = req.params;
+//     console.log('this is topic '+ topic_id)
+//     //creating a new post
+//     const newPost = new Post({
+//         post: req.body.post,
+//         description: req.body.description,
+//         topic_id: req.body.topic_id
+//     });
+//     //get topic by id
+//     const topic_obj = Topic.findById(topic_id).then(topic_obj => topic_obj.posts.push(newPost));
+//     //add posts to topic_object and save
+//     console.log("this is topic_obj " + topic_obj.posts);
+//     topic_obj.save()
+//         .then(newPost.save()
+//         .then(post => res.json(post)).catch(err => console.log(err)));
+// });
+
+
 router.post("/", (req,res) => {
-    //gets topic id form param
-    const {topic} = req.params;
-    //creating a new post
+
+    const {topic_id} = req.params
     const newPost = new Post({
         post: req.body.post,
         description: req.body.description,
         topic_id: req.body.topic_id
     });
-    //get topic id
-    const topic_obj = Topic.findById(topic);
-    // assigning topic as post's parent.
-    //save the post
-    
-         //add posts.
-    topic_obj.posts.push(newPost);
-    topic_obj.save()
-        .then(newPost.save()
-        .then(post => res.json(post)).catch(err => console.log(err)));
-});
+
+    Topic.findById(topic_id).then(ele => console.log(ele))
+
+    // newPost.save().then(post => res.json(post)).catch(err => console.log(err));
+})
 
 module.exports = router;
