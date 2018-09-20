@@ -31,13 +31,12 @@ router.get('/:id/posts', (req,res) => {
 })
 
 router.post('/:id/posts',  (req,res) => {
-    console.log("id" + req.params.id)
     const newPost = new Post({
         post: req.body.post,
         description: req.body.description,
         topic_id: req.params.id
     });
-    const topic_obj = Topic.findById(req.params.id)
+     Topic.findById(req.params.id)
         .then(topic => {
             topic.posts.push(newPost._id);
         })
