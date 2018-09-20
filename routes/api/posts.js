@@ -4,12 +4,12 @@ const router = express.Router();
 const Post = require("../../models/Post");
 const Topic = require('../../models/Topic');
 
-router.get(":topic_id/", (req,res) => {
-    Topic.findById(req.params.topic_id).then(ele => res.json(ele))
-    // Post.find()
-    //     .sort({ date: -1 })
-    //     .then(posts => res.json(posts));
-    //console.log("works")
+router.get("/", (req,res) => {
+    
+    Post.find()
+        .sort({ date: -1 })
+        .then(posts => res.json(posts));
+    console.log("works")
 });
 
 

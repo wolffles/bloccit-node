@@ -40,10 +40,10 @@ router.post('/:id/posts', (req,res) => {
 
     const topic = Topic.findById(id).then(topics => res.json(topics))
     
-    console.log(topic.posts)
+    console.log(topic.posts)// and I don't understand why my topic object is always undefined
 
     //need to save topic object
-    //need to save new post
+    newPost.save().then(post => res.json(post));
 });
 
 
