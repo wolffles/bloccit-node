@@ -35,9 +35,13 @@ router.post("/", (req,res) => {
     //get topic id
     const topic_obj = Topic.findById(topic);
     // assigning topic as post's parent.
-    newPost.topic_id = topic_obj
     //save the post
-    newPost.save().then(post => res.json(post)).catch(err => console.log(err));
-}),
+    
+         //add posts.
+    topic_obj.posts.push(newPost);
+    topic_obj.save()
+        .then(newPost.save()
+        .then(post => res.json(post)).catch(err => console.log(err)));
+});
 
 module.exports = router;
