@@ -16,7 +16,7 @@ const PostSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    topic: {
+    topic_id: {
          ref: 'topic',
          type: Schema.Types.ObjectId
     },
