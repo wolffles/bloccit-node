@@ -16,8 +16,9 @@ const TopicSchema = new Schema({
     },
     posts: [
         { 
-            type: Schema.Types.ObjectId,
-            ref: 'post'
+            ref: 'post',
+            type: Schema.Types.ObjectId
+            
         }
     ],
     date: {

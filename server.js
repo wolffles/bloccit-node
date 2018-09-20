@@ -19,8 +19,7 @@ const db = require('./config/keys').mongoURI
 mongoose.connect(db,{ useNewUrlParser: true })
     .then(() => console.log('MongoDB Connected...')).catch(err => console.log(err));
 
-//use routes... anything that refers to api/topics should refer
-// to the tasks variable commented out above
+//use routes... anything that refers to api/topics should refer to above 
 app.use('/api/home', home);
 app.use('/api/topics', topics);
 app.use('/api/posts', posts);

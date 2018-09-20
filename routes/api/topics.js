@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+
+
 // Topic model 
 const Topic = require('../../models/Topic');
 const Post = require('../../models/Post')
@@ -28,21 +30,14 @@ router.get('/:id/posts', (req,res) => {
    
 })
 
-router.post('/:id/posts', async (req,res) => {
-
-    const { id } = req.params // works
-  
+router.post('/:id/posts',  (req,res) => {
+    console.log("post" + req.body.post)
     const newPost = new Post({
-      post: req.body.post,
-      description: req.body.description,
-      topic_id: req.body.id
-    })
-  
-    const topic = await Topic.findById(id).then(topics => res.json(topics))
-    
-    console.log(topic.posts)// and I don't understand why my topic object is always undefined
+        post: req.body.post,
+        description: req.body.description,
+        topic_id: req.body.topic_id
+    });
 
-    //need to save topic object
     newPost.save().then(post => res.json(post));
 });
 
@@ -52,6 +47,7 @@ router.post('/:id/posts', async (req,res) => {
 //@access Public 
  // this / is already the end point for api/topics/ since your already in the route.
 router.post("/", (req,res) => {
+    console.log("topic" + req.body.topic)
     const newTopic = new Topic({
         topic: req.body.topic,
         description: req.body.description
