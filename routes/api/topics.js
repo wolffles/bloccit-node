@@ -16,13 +16,18 @@ router.get("/", (req,res) => {
     Topic.find()
         .sort({ date: -1 })
         .then(topics => res.json(topics));
-    // console.log("works")
 });
 
+
+//@route Get api/topics/:id
+//@desc Get a specific topic
+//@access Public
 router.get('/:id',(req,res) => {
     Topic.findById(req.params.id).then(topics => res.json(topics))
 })
 
+//@route Get api/topic/:id/posts
+//@desc shows all references(id)s of posts of a given topic
 router.get('/:id/posts', (req,res) => {
     const {id} = req.params
    Topic.findById(id)
@@ -31,6 +36,8 @@ router.get('/:id/posts', (req,res) => {
 })
 
 
+//@route Post api/topic/:id/posts
+//@ Posts a new Post reference into a topics.post array && create a new post object
 router.post('/:id/posts',  async (req,res) => {
     const newPost = new Post({
         post: req.body.post,
