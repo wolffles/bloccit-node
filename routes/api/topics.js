@@ -30,23 +30,24 @@ router.get('/:id/posts', (req,res) => {
    
 })
 
-router.post('/:id/posts',  (req,res) => {
+
+router.post('/:id/posts',  async (req,res) => {
     const newPost = new Post({
         post: req.body.post,
         description: req.body.description,
         topic_id: req.params.id
     });
-     Topic.findById(req.params.id)
-        .then(topic => {
-            topic.posts.push(newPost._id);
-        })
-            .catch(err => {
-                res.send(err);
-            });
-
-    newPost.save().then(post => res.json(post));
-});
-
+    try {
+       await Topic.findById(req.params.id, (err, doc) => {
+         doc.posts.push(newPost._id);
+         doc.save();
+       });
+       const post = await newPost.save()
+       res.json(post)
+    } catch(err) {
+       res.send(err)
+    }
+  });
 
 //@route Post api/Topics
 //@desc Post All Topics
