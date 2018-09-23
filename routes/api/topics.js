@@ -24,7 +24,7 @@ router.get("/", (req,res) => {
 //@access Public
 router.get('/:id',(req,res) => {
     Topic.findById(req.params.id).then(topics => res.json(topics))
-})
+});
 
 //@route Get api/topic/:id/posts
 //@desc shows all references(id)s of posts of a given topic
@@ -33,28 +33,44 @@ router.get('/:id/posts', (req,res) => {
    Topic.findById(id)
     .then(topic => res.json(topic.posts));
    
-})
+});
 
 
-//@route Post api/topic/:id/posts
-//@ Posts a new Post reference into a topics.post array && create a new post object
-router.post('/:id/posts',  async (req,res) => {
+router.post('/:id/posts', (req,res) => {
     const newPost = new Post({
         post: req.body.post,
         description: req.body.description,
         topic_id: req.params.id
     });
-    try {
-       await Topic.findById(req.params.id, (err, doc) => {
-         doc.posts.push(newPost._id);
-         doc.save();
-       });
-       const post = await newPost.save()
-       res.json(post)
-    } catch(err) {
-       res.send(err)
-    }
-  });
+    Topic.findById(req.params.id, (err, doc) => {
+        doc.posts.push(newPost._id)
+        doc.save();
+    }).then(() => {
+        newPost.save().then(post => res.json(post))
+    })
+})
+
+
+
+//@route Post api/topic/:id/posts
+//@ Posts a new Post reference into a topics.post array && create a new post object
+// router.post('/:id/posts',  async (req,res) => {
+//     const newPost = new Post({
+//         post: req.body.post,
+//         description: req.body.description,
+//         topic_id: req.params.id
+//     });
+//     try {
+//        await Topic.findById(req.params.id, (err, doc) => {
+//          doc.posts.push(newPost._id);
+//          doc.save();
+//        });
+//        const post = await newPost.save()
+//        res.json(post)
+//     } catch(err) {
+//        res.send(err)
+//     }
+//   });
 
 //@route Post api/Topics
 //@desc Post All Topics
