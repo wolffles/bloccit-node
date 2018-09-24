@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-
-
 // Topic model 
 const Topic = require('../../models/Topic');
 const Post = require('../../models/Post')
@@ -25,6 +23,29 @@ router.get("/", (req,res) => {
 router.get('/:topicId',(req,res) => {
     Topic.findById(req.params.topicId).then(topic => res.json(topic))
 });
+
+//@route Post api/Topics
+//@desc Post All Topics
+//@access Public 
+// this / is already the end point for api/topics/ since your already in the route.
+router.post("/", (req,res) => {
+    // console.log("topic" + req.body.topic)
+    const newTopic = new Topic({
+        topic: req.body.topic,
+        description: req.body.description
+    });
+
+    newTopic.save().then(topic => res.json(topic));
+});
+
+ 
+//@route delete api/topics
+//@desc delete a topic
+// @access Public
+router.delete('/:id', (req, res) => {
+    Topic.findById(req.params.id).then(topic => topic.remove().then(() => res.json({success:true})))
+    .catch(err => res.status(404).json({success:false}));
+});  
 
 //@route Get api/topic/:id/posts
 //@desc shows all references(id)s of posts of a given topic
@@ -103,28 +124,5 @@ router.delete("/:topicId/posts/:postId", async (req,res) => {
         res.json({success: false })
     }
 });
-
-//@route Post api/Topics
-//@desc Post All Topics
-//@access Public 
-// this / is already the end point for api/topics/ since your already in the route.
-router.post("/", (req,res) => {
-    // console.log("topic" + req.body.topic)
-    const newTopic = new Topic({
-        topic: req.body.topic,
-        description: req.body.description
-    });
-
-    newTopic.save().then(topic => res.json(topic));
-});
-
- 
-//@route delete api/topics
-//@desc delete a topic
-// @access Public
-router.delete('/:id', (req, res) => {
-    Topic.findById(req.params.id).then(topic => topic.remove().then(() => res.json({success:true})))
-    .catch(err => res.status(404).json({success:false}));
-});  
 
 module.exports = router;

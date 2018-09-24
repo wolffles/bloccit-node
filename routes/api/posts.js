@@ -43,22 +43,6 @@ router.delete("/:postId", async (req,res) => {
     }
 });
 
-//@route Post api/posts
-//@description Post A Post
-//@access Public
 
-// moved post for posts collection to topics route
-
-// router.post("/", (req,res) => {
-
-//     const {topic_id} = req.params
-//     const newPost = new Post({
-//         post: req.body.post,
-//         description: req.body.description,
-//         topic_id: req.body.topic_id
-//     });
-
-//     newPost.save().then(post => res.json(post)).catch(err => console.log(err));
-// })
 
 module.exports = router; 
