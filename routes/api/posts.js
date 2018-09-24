@@ -12,14 +12,37 @@ router.get("/", (req,res) => {
     console.log("works")
 });
 
+router.get('/:postId', (req, res) => {
+    Post.findById(req.params.postId).then(post => res.json(post));
 
-//@route Delete api/posts
-//@description Delete a post
-//@access Public
-router.delete('/:id', (req, res) => {
-    Post.findById(req.params.id).then(post => post.remove().then(() => res.json({success:true})))
-    .catch(err => res.status(404).json({success:false}));
-}); 
+})
+
+// @route Delete api/posts
+// @description Delete a post
+// @access Public
+// router.delete('/:postId', async (req, res) => {
+//     Post.findById(req.params.postId).then(post => post.remove().then(() => res.json({success:true})))
+//     .catch(err => res.status(404).json({success:false}));
+// }); 
+
+router.delete("/:postId", async (req,res) => {
+    const {postId} = req.params
+    post_obj = await Post.findById(postId)
+    
+    try{
+        await Topic.findById(post_obj.topic_id, (err, doc) => {
+            doc.posts = doc.posts.filter(id => id != postId);
+            doc.save();
+            console.log("after save" +doc)
+        });
+        await post_obj.remove();
+        console.log("post has been removed")
+        res.json({success:true})
+    } catch(e) {
+        res.status(404).json({success:false })
+    }
+});
+
 //@route Post api/posts
 //@description Post A Post
 //@access Public
@@ -38,4 +61,4 @@ router.delete('/:id', (req, res) => {
 //     newPost.save().then(post => res.json(post)).catch(err => console.log(err));
 // })
 
-module.exports = router;
+module.exports = router; 

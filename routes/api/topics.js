@@ -22,20 +22,32 @@ router.get("/", (req,res) => {
 //@route Get api/topics/:id
 //@desc Get a specific topic
 //@access Public
-router.get('/:id',(req,res) => {
-    Topic.findById(req.params.id).then(topics => res.json(topics))
+router.get('/:topicId',(req,res) => {
+    Topic.findById(req.params.topicId).then(topic => res.json(topic))
 });
 
 //@route Get api/topic/:id/posts
 //@desc shows all references(id)s of posts of a given topic
-router.get('/:id/posts', (req,res) => {
-    const {id} = req.params
-   Topic.findById(id)
+router.get('/:topicId/posts', (req,res) => {
+    const {topicId} = req.params
+    Topic.findById(topicId)
     .then(topic => res.json(topic.posts));
-   
 });
 
+//@route Get api/topic/:id/posts/:id
+//@desc shows a single post
+router.get('/:topicId/posts/:postId', async (req, res) => {
+    const {postId} = req.params
+    try {    
+        post_obj = await Post.findById(postId)
+        res.json(post_obj)
+    } catch(e) {
+        res.send(e)
+    }  
+});
 
+//@route Post api/topic/:id/posts
+//@ Posts a new Post reference into a topics.post array && create a new post object
 router.post('/:id/posts', (req,res) => {
     const newPost = new Post({
         post: req.body.post,
@@ -48,10 +60,9 @@ router.post('/:id/posts', (req,res) => {
     }).then(() => {
         newPost.save().then(post => res.json(post))
     })
-})
-
-
-
+});
+ 
+//below does the same thing except using an async await method, which I saved as a reference to myself.
 //@route Post api/topic/:id/posts
 //@ Posts a new Post reference into a topics.post array && create a new post object
 // router.post('/:id/posts',  async (req,res) => {
@@ -72,12 +83,33 @@ router.post('/:id/posts', (req,res) => {
 //     }
 //   });
 
+// @route Delete api/Topics/:id/post/:id
+// @desc Delete a post
+router.delete("/:topicId/posts/:postId", async (req,res) => {
+    const {postId} = req.params
+    const {topicId} = req.params
+    post_obj = await Post.findById(postId)
+    
+    try{
+        await Topic.findById(topicId, (err, doc) => {
+            doc.posts = doc.posts.filter(id => id != postId);
+            doc.save();
+            console.log("after save" +doc)
+        });
+        await post_obj.remove();
+        console.log("post has been removed")
+        res.json({success:true})
+    } catch(e) {
+        res.json({success: false })
+    }
+});
+
 //@route Post api/Topics
 //@desc Post All Topics
 //@access Public 
- // this / is already the end point for api/topics/ since your already in the route.
+// this / is already the end point for api/topics/ since your already in the route.
 router.post("/", (req,res) => {
-    console.log("topic" + req.body.topic)
+    // console.log("topic" + req.body.topic)
     const newTopic = new Topic({
         topic: req.body.topic,
         description: req.body.description
