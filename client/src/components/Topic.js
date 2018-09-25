@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {getTopics, deleteTopic} from '../actions/topicActions';
-import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
+import { Container, ListGroup, ListGroupItem, Button, NavLink } from 'reactstrap';
 import {connect} from 'react-redux'
 import {PropTypes} from 'prop-types';
 
@@ -33,6 +33,7 @@ class TopicList extends Component {
               size='sm'
               onClick={ this.onDeleteClick.bind(this, _id)}
               >&times;</Button>
+               <NavLink href="/topics/${_id}"></NavLink>
               <h3>{topic}</h3> {description}
             </ListGroupItem>
           )}

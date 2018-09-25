@@ -67,6 +67,7 @@ router.get('/:topicId/posts/:postId', async (req, res) => {
     }  
 });
 
+<<<<<<< Updated upstream
 //@route Post api/topic/:id/posts
 //@ Posts a new Post reference into a topics.post array && create a new post object
 router.post('/:id/posts', (req,res) => {
@@ -87,22 +88,43 @@ router.post('/:id/posts', (req,res) => {
 //@route Post api/topic/:id/posts
 //@ Posts a new Post reference into a topics.post array && create a new post object
 // router.post('/:id/posts',  async (req,res) => {
+=======
+// router.post('/:id/posts', async (req,res) => {
+>>>>>>> Stashed changes
 //     const newPost = new Post({
 //         post: req.body.post,
 //         description: req.body.description,
 //         topic_id: req.params.id
 //     });
-//     try {
-//        await Topic.findById(req.params.id, (err, doc) => {
-//          doc.posts.push(newPost._id);
-//          doc.save();
-//        });
-//        const post = await newPost.save()
-//        res.json(post)
-//     } catch(err) {
-//        res.send(err)
-//     }
-//   });
+//     Topic.findById(req.params.id, (err, doc) => {
+//         doc.posts.push(newPost._id)
+//         doc.save();
+//     }).then(() => {
+//         newPost.save().then(post => res.json(post))
+//     })
+// })
+
+
+
+// @route Post api/topic/:id/posts
+// @ Posts a new Post reference into a topics.post array && create a new post object
+router.post('/:id/posts',  async (req,res) => {
+    const newPost = new Post({
+        post: req.body.post,
+        description: req.body.description,
+        topic_id: req.params.id
+    });
+    try {
+        await Topic.findById(req.params.id, (err, doc) => {
+            doc.posts.push(newPost._id);
+            doc.save();
+        });
+        const post = await newPost.save()
+        res.json(post)
+    }catch(err) {
+        console.log(err)
+    }
+  });
 
 // @route Delete api/Topics/:id/post/:id
 // @desc Delete a post
