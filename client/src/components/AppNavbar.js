@@ -37,9 +37,9 @@ class AppNavbar extends Component {
                     <NavItem>
                       <NavLink href="/topics" >Topic</NavLink>
                     </NavItem>
-                    <NavItem>
+                    {/* <NavItem>
                       <NavLink href="/posts">posts</NavLink>
-                    </NavItem>
+                    </NavItem> */}
                     <NavItem>
                       <NavLink href="https://github.com/wolffles">GitHub</NavLink>
                     </NavItem>

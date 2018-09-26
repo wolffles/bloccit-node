@@ -36,7 +36,7 @@ class PostList extends Component{
             <h1> Posts  <PostModal /></h1>
             {console.log(posts)}
             <ListGroup >
-            {posts.map(({_id, post, description}) => 
+            {posts.map(({_id, post, description, topic_id}) => 
               <ListGroupItem key={_id}>
                 {/* <Button 
                 className='remove-btn'
@@ -44,7 +44,7 @@ class PostList extends Component{
                 size='sm'
                 onClick={ this.onDeleteClick.bind(this, _id)}
                 >&times;</Button> */}
-                <NavLink href="/topics/"_id>
+                <NavLink href={"topics/"+topic_id}>
                   <h3>{post}</h3> {description}
                 </NavLink>
               </ListGroupItem>
