@@ -22,8 +22,8 @@ class App extends Component {
           <AppNavbar />
           <main>
             <Route exact path="/" component={Home} />  {/* exact path because by default a route matches any path in the URL that begins with the value of the path prop */}
-            <Route path="/topics" component={Topic} />
-            <Route path="/topics/:id" component={Post} />
+            <Route exact path="/topics" component={Topic} />
+            <Route exact path="/topics/:topicId" component={Post} />
           </main>
         </div>
       </Provider>

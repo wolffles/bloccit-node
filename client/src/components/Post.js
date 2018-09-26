@@ -20,9 +20,18 @@ const postlist = [
 
 
 class PostList extends Component{
-
+  constructor(){ 
+    super();
+    this.state = {topic:{
+      topic:'',
+      description: '',
+      posts: []
+      }
+    }
+  }
   componentDidMount() {
-    this.props.viewTopic();
+    console.log("these are the props", this.props)
+    this.props.viewTopic(this.props.match.params.topicId).then(topic => this.setState({topic}));
   }
 
 //   onDeleteClick = (id) => {
@@ -30,11 +39,12 @@ class PostList extends Component{
 
 //   }
     render() {
+        // console.log(this.props.topic)
         const {posts} = this.props.topic
         return(
             <Container>
             <h1> Posts  <PostModal /></h1>
-            {console.log(posts)}
+            
             <ListGroup >
             {posts.map(({_id, post, description, topic_id}) => 
               <ListGroupItem key={_id}>
@@ -63,6 +73,8 @@ PostList.proptypes = {
   const mapStateToProps = (state) => ({
     topic: state.topic // called topic because thats what we called it in reducer/index.js
   })
-  
-  export default connect(mapStateToProps, { viewTopic })(PostList)
+  const mapDispatchToProps = () => dispatch => ({
+    viewTopic: (id) => dispatch(viewTopic(id)) 
+  })
+  export default connect(mapStateToProps,  mapDispatchToProps )(PostList)
     

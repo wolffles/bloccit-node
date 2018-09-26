@@ -1,5 +1,6 @@
 import {GET_TOPICS, ADD_TOPIC, DELETE_TOPIC, VIEW_TOPIC, LOADING} from '../actions/types.js';
 const initialState = {
+    topic: {},
     topics: [],
     posts: [], 
     loading: false
@@ -9,7 +10,7 @@ export default function( state = initialState, action) {
     switch(action.type) {
         case GET_TOPICS: 
             return {
-                ...state, // we use a spread operator cuz we can mutate the state we have to basically make a copy of it. data flow is  unidirectional.
+                ...state, // we use a spread operator cuz we cant mutate the state we have to basically make a copy of it. data flow is  unidirectional.
                 topics: action.payload
             }
         case DELETE_TOPIC:
@@ -27,7 +28,7 @@ export default function( state = initialState, action) {
         //create VIEW_TOPIC which shows posts for that topic via payload: response
         case VIEW_TOPIC: 
             return { 
-                topics: [action.payload]
+                topic: action.payload
             }
 
         case LOADING:

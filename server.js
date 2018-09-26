@@ -5,6 +5,7 @@ const path = require('path');
 
 const home = require('./routes/api/home');
 const topics = require('./routes/api/topics');
+const topics2 = require('./routes/api/topics');
 const posts = require('./routes/api/posts');
 
 const app = express();
@@ -22,6 +23,7 @@ mongoose.connect(db,{ useNewUrlParser: true })
 //use routes... anything that refers to api/topics should refer to above 
 app.use('/api/home', home);
 app.use('/api/topics', topics);
+app.use('/topics/api/topics', topics2); 
 app.use('/api/posts', posts);
 
 

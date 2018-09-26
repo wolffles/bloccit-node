@@ -33,7 +33,7 @@ class TopicList extends Component {
               size='sm'
               onClick={ this.onDeleteClick.bind(this, _id)}
               >&times;</Button>
-              <NavLink href={"/topics/"+_id}>
+              <NavLink href={`/topics/${_id}`} >
                 <h3>{topic}</h3> {description}
               </NavLink>
             </ListGroupItem>

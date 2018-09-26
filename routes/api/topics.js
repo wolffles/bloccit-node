@@ -11,6 +11,7 @@ const Post = require('../../models/Post')
  // this / is already the end point for api/topics/ since your already in the route.
 router.get("/", (req,res) => {
     //returns a promis so you have to use.then
+
     Topic.find()
         .sort({ date: -1 })
         .then(topics => res.json(topics));
@@ -21,9 +22,14 @@ router.get("/", (req,res) => {
 //@desc Get a specific topic
 //@access Public
 router.get('/:topicId',(req,res) => {
-    Topic.findById(req.params.topicId).then(topic => res.json(topic))
+    console.log('veiwTopic backend', req.params)
+    Topic.findById(req.params.topicId)
+    .then(topic => {
+       console.log("this is recieving ", topic);
+       return  res.send(topic);
+    });
 });
-
+  
 //@route Post api/Topics
 //@desc Post All Topics
 //@access Public 
