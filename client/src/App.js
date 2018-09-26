@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 import Home from './components/Home'
 import AppNavbar from './components/AppNavbar';
-import {Route} from 'react-router-dom';
 import Topic from './components/Topic';
+import Post from './components/Post';
 
 import { Provider } from 'react-redux';
 import store from './store';
@@ -22,6 +23,7 @@ class App extends Component {
           <main>
             <Route exact path="/" component={Home} />  {/* exact path because by default a route matches any path in the URL that begins with the value of the path prop */}
             <Route path="/topics" component={Topic} />
+            <Route path="/topics/:id" component={Post} />
           </main>
         </div>
       </Provider>

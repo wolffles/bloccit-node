@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {GET_TOPICS,ADD_TOPIC,DELETE_TOPIC, LOADING} from './types';
+import {GET_TOPICS, ADD_TOPIC, DELETE_TOPIC, VIEW_TOPIC, LOADING} from './types';
 
 export const getTopics = () => dispatch => {
     axios.get('/api/topics').then(res => dispatch({
@@ -26,6 +26,17 @@ export const deleteTopic = (id) => dispatch => {
             })
     )
 }
+
+export const viewTopic = (id) => dispatch => {
+    axios.get(`api/topics/${id}`).then(res => 
+        dispatch({
+            type: VIEW_TOPIC,
+            payload: res.data
+        })
+    )
+}
+
+// hit endpoints for all our routes in actions. and the payload is the response from the routes
 
 export const setTaskLoading = () => {
     return {

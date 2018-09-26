@@ -1,6 +1,7 @@
-import {GET_TOPICS, ADD_TOPIC, DELETE_TOPIC, LOADING} from '../actions/types.js';
+import {GET_TOPICS, ADD_TOPIC, DELETE_TOPIC, VIEW_TOPIC, LOADING} from '../actions/types.js';
 const initialState = {
     topics: [],
+    posts: [], 
     loading: false
 };
         
@@ -13,7 +14,7 @@ export default function( state = initialState, action) {
             }
         case DELETE_TOPIC:
             return {
-                ...state,
+                ...state, // state here is just a blank array
                 topics: state.topics.filter(topic => topic._id !== action.payload)
             }
 
@@ -21,6 +22,12 @@ export default function( state = initialState, action) {
             return {
                 ...state,
                 topics: [action.payload, ...state.topics]
+            }
+
+        //create VIEW_TOPIC which shows posts for that topic via payload: response
+        case VIEW_TOPIC: 
+            return { 
+                topics: [action.payload]
             }
 
         case LOADING:

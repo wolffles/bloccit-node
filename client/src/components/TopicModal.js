@@ -53,14 +53,14 @@ class TopicModal extends Component{
                     color="dark"
                     style={{marginBottom: '2rem'}}
                     onClick={this.toggle}
-                > Add Task
+                > Add Topic
                 </Button>
                 <Modal
                     isOpen={this.state.modal}
                     toggle={this.toggle}
                 >
                     <ModalHeader>
-                        Add To Task List
+                        Add To Topics List
                     </ModalHeader>
                     <ModalBody>
                         <Form onSubmit={this.onSubmit}>

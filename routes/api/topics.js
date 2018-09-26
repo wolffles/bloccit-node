@@ -67,7 +67,6 @@ router.get('/:topicId/posts/:postId', async (req, res) => {
     }  
 });
 
-<<<<<<< Updated upstream
 //@route Post api/topic/:id/posts
 //@ Posts a new Post reference into a topics.post array && create a new post object
 router.post('/:id/posts', (req,res) => {
@@ -88,9 +87,6 @@ router.post('/:id/posts', (req,res) => {
 //@route Post api/topic/:id/posts
 //@ Posts a new Post reference into a topics.post array && create a new post object
 // router.post('/:id/posts',  async (req,res) => {
-=======
-// router.post('/:id/posts', async (req,res) => {
->>>>>>> Stashed changes
 //     const newPost = new Post({
 //         post: req.body.post,
 //         description: req.body.description,
@@ -125,7 +121,7 @@ router.post('/:id/posts',  async (req,res) => {
         console.log(err)
     }
   });
-
+ 
 // @route Delete api/Topics/:id/post/:id
 // @desc Delete a post
 router.delete("/:topicId/posts/:postId", async (req,res) => {

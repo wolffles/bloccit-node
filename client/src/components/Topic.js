@@ -22,7 +22,7 @@ class TopicList extends Component {
     const { topics } = this.props.topic;
     return(
         <Container>
-          <h1> TOPIC PAGE  <TopicModal /></h1>
+          <h1> TOPICS  <TopicModal /></h1>
           
           <ListGroup >
           {topics.map(({_id, topic, description}) => 
@@ -33,8 +33,9 @@ class TopicList extends Component {
               size='sm'
               onClick={ this.onDeleteClick.bind(this, _id)}
               >&times;</Button>
-               <NavLink href="/topics/${_id}"></NavLink>
-              <h3>{topic}</h3> {description}
+              <NavLink href={"/topics/"+_id}>
+                <h3>{topic}</h3> {description}
+              </NavLink>
             </ListGroupItem>
           )}
           </ListGroup>

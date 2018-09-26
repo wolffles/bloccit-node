@@ -38,6 +38,9 @@ class AppNavbar extends Component {
                       <NavLink href="/topics" >Topic</NavLink>
                     </NavItem>
                     <NavItem>
+                      <NavLink href="/posts">posts</NavLink>
+                    </NavItem>
+                    <NavItem>
                       <NavLink href="https://github.com/wolffles">GitHub</NavLink>
                     </NavItem>
                     <UncontrolledDropdown nav inNavbar>
