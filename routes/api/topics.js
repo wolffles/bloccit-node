@@ -26,7 +26,7 @@ router.get('/:topicId',(req,res) => {
     Topic.findById(req.params.topicId)
     .then(topic => {
        console.log("this is recieving ", topic);
-       return  res.send(topic);
+       return  res.json(topic);
     });
 });
   
@@ -58,8 +58,20 @@ router.delete('/:id', (req, res) => {
 router.get('/:topicId/posts', (req,res) => {
     const {topicId} = req.params
     Topic.findById(topicId)
-    .then(topic => res.json(topic.posts));
+    .populate('posts')
+    .exec(function(err,data){
+        if (err) {
+            throw err;
+        }
+        else {
+            res.json(data);
+
+        }
+    })
+    // .then(topic => res.send(topic))
+    // .catch(err => res.send(err))
 });
+ 
 
 //@route Get api/topic/:id/posts/:id
 //@desc shows a single post

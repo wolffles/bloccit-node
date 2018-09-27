@@ -1,6 +1,6 @@
 import {GET_TOPICS, ADD_TOPIC, DELETE_TOPIC, VIEW_TOPIC, LOADING} from '../actions/types.js';
 const initialState = {
-    topic: {},
+    topic_obj: {},
     topics: [],
     posts: [], 
     loading: false
@@ -28,7 +28,8 @@ export default function( state = initialState, action) {
         //create VIEW_TOPIC which shows posts for that topic via payload: response
         case VIEW_TOPIC: 
             return { 
-                topic: action.payload
+                topic_obj: action.payload,
+                posts: action.payload.posts
             }
 
         case LOADING:

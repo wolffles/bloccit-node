@@ -5,19 +5,6 @@ import {viewTopic} from '../actions/topicActions'
 import { Container, ListGroup, ListGroupItem, Button, NavLink } from 'reactstrap';
 
 import PostModal from './PostModal';
-const postlist = [
-    {
-        post: "this is post 1",
-        description: "explains post",
-        topic: "5ba076158b627c049820487b"
-    },
-    {
-        post: "this is post 2",
-        description: "explains post2",
-        topic: "5ba076158b627c049820487b"
-    }
-]
-
 
 class PostList extends Component{
   constructor(){ 
@@ -34,13 +21,10 @@ class PostList extends Component{
     this.props.viewTopic(this.props.match.params.topicId).then(topic => this.setState({topic}));
   }
 
-//   onDeleteClick = (id) => {
-//     this.props.deleteTopic(id)
-
-//   }
     render() {
-        // console.log(this.props.topic)
+        console.log("this is this.props.topic", this.props.topic)
         const {posts} = this.props.topic
+        console.log("this is posts", posts)
         return(
             <Container>
             <h1> Posts  <PostModal /></h1>
@@ -54,7 +38,7 @@ class PostList extends Component{
                 size='sm'
                 onClick={ this.onDeleteClick.bind(this, _id)}
                 >&times;</Button> */}
-                <NavLink href={"topics/"+topic_id}>
+                <NavLink href={`topics/${topic_id}/posts/${_id}`}>
                   <h3>{post}</h3> {description}
                 </NavLink>
               </ListGroupItem>
