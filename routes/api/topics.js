@@ -64,6 +64,7 @@ router.get('/:topicId/posts', (req,res) => {
             throw err;
         }
         else {
+            console.log(data)
             res.json(data);
 
         }

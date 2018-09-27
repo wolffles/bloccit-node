@@ -30,7 +30,7 @@ export const deleteTopic = (id) => dispatch => {
 
 export const viewTopic = (id) => dispatch => {
     console.log("made it to viewTopic front end", id)
-    return axios.get(`/api/topics/${id}`).then(res => {
+    return axios.get(`/api/topics/${id}/posts`).then(res => {
         console.log("viewTopic res", res.data);
         return dispatch({
             type: VIEW_TOPIC,
